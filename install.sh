@@ -50,7 +50,7 @@ check_installed_zhenxun_status() {
 }
 
 check_installed_cqhttp_status() {
-  [[ ! -e "${WORK_DIR}/go-cqhttp/go-cqhttp" ]] && echo -e "${Error} go-cqhttp 没有安装，请检查 !" && exit 1
+  [[ ! -e "${WORK_DIR}/go-cqhttp" ]] && echo -e "${Error} go-cqhttp 没有安装，请检查 !" && exit 1
 }
 
 check_pid_zhenxun() {
@@ -239,10 +239,10 @@ Set_config_bot() {
 }
 
 Set_config() {
-    if [[ -e "${WORK_DIR}/go-cqhttp/config.yml" ]]; then
+    if [[ -e "${WORK_DIR}/config.yml" ]]; then
         echo -e "${info} go-cqhttp 配置文件已存在，跳过生成"
     else
-        cd ${WORK_DIR}/go-cqhttp && echo -e "3\n" | ./go-cqhttp > /dev/null 2>&1
+        cd ${WORK_DIR}/ && echo -e "3\n" | ./go-cqhttp > /dev/null 2>&1
         sudo sed -i 's|universal:.*|universal: ws://localhost:14514/onebot/v11/ws|g' config.yml
     fi
     Set_config_bot
@@ -306,11 +306,11 @@ Restart_cqhttp() {
 }
 
 View_cqhttp_log() {
-    tail -f -n 100 ${WORK_DIR}/go-cqhttp/go-cqhttp.log
+    tail -f -n 100 ${WORK_DIR}/go-cqhttp.log
 }
 
 Set_config_cqhttp() {
-    vim ${WORK_DIR}/go-cqhttp/config.yml
+    vim ${WORK_DIR}/config.yml
 }
 
 
@@ -319,7 +319,7 @@ Set_config_zhenxun() {
 }
 
 Exit_cqhttp() {
-    cd ${WORK_DIR}/go-cqhttp
+    cd ${WORK_DIR}/
     rm -f session.token
     echo -e "${Info} go-cqhttp 账号已退出..."
     Stop_cqhttp
@@ -418,7 +418,7 @@ menu_cqhttp() {
 ————————————
  ${Green_font_prefix} 8.${Font_color_suffix} 退出 go-cqhttp 账号
  ${Green_font_prefix}10.${Font_color_suffix} 切换为 zhenxun_bot 菜单" && echo
-  if [[ -e "${WORK_DIR}/go-cqhttp/go-cqhttp" ]]; then
+  if [[ -e "${WORK_DIR}/go-cqhttp" ]]; then
     check_pid_cqhttp
     if [[ -n "${PID}" ]]; then
       echo -e " 当前状态: go-cqhttp ${Green_font_prefix}已安装${Font_color_suffix} 并 ${Green_font_prefix}已启动${Font_color_suffix}"
@@ -426,7 +426,7 @@ menu_cqhttp() {
       echo -e " 当前状态: go-cqhttp ${Green_font_prefix}已安装${Font_color_suffix} 但 ${Red_font_prefix}未启动${Font_color_suffix}"
     fi
   else
-    if [[ -e "${file}/go-cqhttp/go-cqhttp" ]]; then
+    if [[ -e "${file}/go-cqhttp" ]]; then
       check_pid_cqhttp
       if [[ -n "${PID}" ]]; then
         echo -e " 当前状态: go-cqhttp ${Green_font_prefix}已安装${Font_color_suffix} 并 ${Green_font_prefix}已启动${Font_color_suffix}"
