@@ -4,7 +4,7 @@ export PATH
 
 update_shell_url="https://raw.githubusercontent.com/zhenxun-org/zhenxun_bot-deploy/master/install.sh"
 zhenxun_url="https://github.com/HibiKier/zhenxun_bot.git"
-WORK_DIR="/home"
+WORK_DIR="/home/ubuntu/oneBot"
 TMP_DIR="$(mktemp -d)"
 python_v="python3.8"
 which python3.9 && python_v="python3.9"
